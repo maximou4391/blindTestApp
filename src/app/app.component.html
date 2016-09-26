@@ -1,0 +1,18 @@
+<h1>
+  {{title}}
+</h1>
+
+Team name:
+<input [(ngModel)]="newTeamName">
+<button (click)="addTeam(newTeamName)">Add Team</button>
+
+<ul>
+  <li class="text" *ngFor="let team of teams | async">
+    {{team.name}}({{team.score}})
+
+    <button (click)="addPoint(team.$key, team.score)">+</button>
+    <button (click)="removePoint(team.$key, team.score)">-</button>
+    <button (click)="removeTeam(team.$key)">remove team</button>
+
+  </li>
+</ul>
