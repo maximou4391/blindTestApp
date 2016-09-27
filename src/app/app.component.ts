@@ -13,7 +13,7 @@ export class AppComponent {
 
   maximumPoints: number = 50;
 
-  scoreHeight: number = 40;
+  scoreHeight: number = 20;
 
   newTeamName: string;
 
