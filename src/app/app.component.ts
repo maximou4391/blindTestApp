@@ -26,7 +26,9 @@ export class AppComponent {
   }
 
   addPoint(key: string, score: number) {
-    this.teams.update(key, {score: score + 1});
+    if (score < this.maximumPoints) {
+      this.teams.update(key, {score: score + 1});
+    }
   }
 
   removePoint(key: string, score: number) {
