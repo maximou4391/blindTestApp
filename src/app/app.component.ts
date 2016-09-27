@@ -11,7 +11,7 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 export class AppComponent {
   teams: FirebaseListObservable<any[]>;
 
-  maximumPoints: number = 200;
+  maximumPoints: number = 50;
 
   scoreHeight: number = 40;
 
@@ -26,7 +26,9 @@ export class AppComponent {
   }
 
   addPoint(key: string, score: number) {
-    this.teams.update(key, {score: score + 1});
+    if (score < this.maximumPoints) {
+      this.teams.update(key, {score: score + 1});
+    }
   }
 
   removePoint(key: string, score: number) {
@@ -39,7 +41,10 @@ export class AppComponent {
     this.teams.push({name: this.newTeamName, score: 0});
   }
 
-  removeTeam(key: string) {
-    this.teams.remove(key);
+  removeTeam(key: string, teamName: string) {
+    let answer = confirm("Remove team: " + teamName + "?");
+    if (answer == true) {
+      this.teams.remove(key);
+    }
   }
 }

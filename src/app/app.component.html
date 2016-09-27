@@ -1,35 +1,38 @@
 <div class="container">
-<div>
-  Team name:
-  <input type="text" [(ngModel)]="newTeamName">
-  <button (click)="addTeam(newTeamName)">Add Team</button>
-</div>
-
-<div>
-  Max Points:
-  <input type="number" [(ngModel)]="maximumPoints">
-</div>
-
-<div>
-  Score height:
-  <input type="number" [(ngModel)]="scoreHeight">
-</div>
-
+  <h1>Helping Hands <img src="../assets/logo.gif"
+                         height="80"
+                         width="80"> Musical Quizz</h1>
 <ul class="team-list">
   <li class="team-item" *ngFor="let team of teams | async">
-    {{team.name}}({{team.score}})
+    <i (click)="removeTeam(team.$key, team.name)"
+       class="fa fa-trash fa-2x"
+       aria-hidden="true"></i>
+    <span class="team-name">{{team.name}}</span>
 
-    <button (click)="addPoint(team.$key, team.score)">+</button>
-    <button (click)="removePoint(team.$key, team.score)">-</button>
-    <button (click)="removeTeam(team.$key)">remove team</button>
+    <button class="minus" (click)="removePoint(team.$key, team.score)">-</button>
+    <button class="plus" (click)="addPoint(team.$key, team.score)">+</button>
 
     <div class="score-outer" [style.height]="scoreHeight + 'px'">
       <div class="score-inner" [style.width]="(team.score/maximumPoints)*100+'%'">
       </div>
-      <span class="score-number">{{team.score}}</span>
+      <span class="score-number"
+            [style.font-size]="scoreHeight + 'px'">{{team.score}}</span>
 
     </div>
 
   </li>
 </ul>
+</div>
+
+
+<div class="sticky-footer">
+  <label for="add-team">Team name:</label>
+  <input id="add-team" type="text" [(ngModel)]="newTeamName">
+  <button (click)="addTeam(newTeamName)">Add Team</button>
+
+  <label for="max-points">Max Points:</label>
+  <input id="max-points" type="number" [(ngModel)]="maximumPoints">
+
+  <label for="score-height">Score height:</label>
+  <input id="score-height" type="number" [(ngModel)]="scoreHeight">
 </div>
