@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +9,11 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 })
 export class AppComponent {
-  title = 'app works!';
   teams: FirebaseListObservable<any[]>;
+
+  maximumPoints: number = 200;
+
+  scoreHeight: number = 40;
 
   newTeamName: string;
 
@@ -27,11 +30,13 @@ export class AppComponent {
   }
 
   removePoint(key: string, score: number) {
-    this.teams.update(key, {score: score - 1});
+    if (score > 0) {
+      this.teams.update(key, {score: score - 1});
+    }
   }
 
   addTeam() {
-    this.teams.push({ name: this.newTeamName , score: 0});
+    this.teams.push({name: this.newTeamName, score: 0});
   }
 
   removeTeam(key: string) {

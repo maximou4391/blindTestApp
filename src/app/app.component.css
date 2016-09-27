@@ -1,0 +1,31 @@
+.score-outer {
+  width: 100%;
+  display: block;
+}
+
+.score-inner {
+  height: 100%;
+  display: inline-block;
+  background-color: black;
+  box-shadow: 0px 0px 15px #f701ba;
+  border-radius: 8px;
+}
+
+.team-list {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.team-item {
+  margin-bottom: 15px;
+}
+
+.score-number {
+  font-family: 'Baloo Bhai', cursive;
+  font-size: 30px;
+  color: black;
+  vertical-align: middle;
+  position: absolute;
+  margin-left: 10px;
+}

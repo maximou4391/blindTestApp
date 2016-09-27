@@ -1,18 +1,35 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+<div>
+  Team name:
+  <input type="text" [(ngModel)]="newTeamName">
+  <button (click)="addTeam(newTeamName)">Add Team</button>
+</div>
 
-Team name:
-<input [(ngModel)]="newTeamName">
-<button (click)="addTeam(newTeamName)">Add Team</button>
+<div>
+  Max Points:
+  <input type="number" [(ngModel)]="maximumPoints">
+</div>
 
-<ul>
-  <li class="text" *ngFor="let team of teams | async">
+<div>
+  Score height:
+  <input type="number" [(ngModel)]="scoreHeight">
+</div>
+
+<ul class="team-list">
+  <li class="team-item" *ngFor="let team of teams | async">
     {{team.name}}({{team.score}})
 
     <button (click)="addPoint(team.$key, team.score)">+</button>
     <button (click)="removePoint(team.$key, team.score)">-</button>
     <button (click)="removeTeam(team.$key)">remove team</button>
 
+    <div class="score-outer" [style.height]="scoreHeight + 'px'">
+      <div class="score-inner" [style.width]="(team.score/maximumPoints)*100+'%'">
+      </div>
+      <span class="score-number">{{team.score}}</span>
+
+    </div>
+
   </li>
 </ul>
+</div>
