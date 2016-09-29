@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, AngularFireAuth} from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +17,16 @@ export class AppComponent {
 
   newTeamName: string;
 
-  constructor(af: AngularFire) {
+  auth: AngularFireAuth;
+
+  email: string;
+
+  password: string;
+
+  constructor(public af: AngularFire, _auth: AngularFireAuth) {
     this.teams = af.database.list('/items');
     console.log('teams', this.teams);
+    this.auth = _auth;
   }
 
   ngOnInit() {
@@ -47,4 +54,11 @@ export class AppComponent {
       this.teams.remove(key);
     }
   }
+
+  login(){
+    this.af.auth.login({ email: this.email, password: this.password });
+    this.af.auth.login();
+  }
+
+
 }

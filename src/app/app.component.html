@@ -1,4 +1,21 @@
+<button type="button"
+        class="btn btn-info"
+        data-toggle="collapse"
+        data-target="#demo">Simple collapsible</button>
+<div id="demo" class="collapse">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+
+<label for="email">Email</label>
+<input id="email" type="text" [(ngModel)]="email">
+<label for="password">Password</label>
+<input id="password" type="text" [(ngModel)]="password">
+<button (click)="login()">Login</button>
 <div class="container">
+
+
   <h1>Helping Hands <img src="../assets/logo.gif"
                          height="80"
                          width="80"> Musical Quizz</h1>
