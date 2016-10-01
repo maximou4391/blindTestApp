@@ -26,10 +26,12 @@ export class AppComponent {
   constructor(public af: AngularFire, _auth: AngularFireAuth) {
     this.teams = af.database.list('/items');
     console.log('teams', this.teams);
+
     this.auth = _auth;
   }
 
   ngOnInit() {
+    console.log(this.af.auth);
   }
 
   addPoint(key: string, score: number) {
@@ -56,8 +58,13 @@ export class AppComponent {
   }
 
   login(){
-    this.af.auth.login({ email: this.email, password: this.password });
+    this.af.auth.login({ email: this.email,
+      password: this.password });
     this.af.auth.login();
+  }
+
+  logout() {
+    this.af.auth.logout();
   }
 
 
