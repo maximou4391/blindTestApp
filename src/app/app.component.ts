@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {AngularFire, FirebaseListObservable, AngularFireAuth} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, FirebaseObjectObservable, AngularFireAuth} from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +11,35 @@ import {AngularFire, FirebaseListObservable, AngularFireAuth} from 'angularfire2
 export class AppComponent {
   teams: FirebaseListObservable<any[]>;
 
+  songs: FirebaseListObservable<any[]>;
+
   maximumPoints: number = 50;
 
   scoreHeight: number = 20;
 
   newTeamName: string;
 
+  newSongArtist: string;
+
+  newSongTitle: string;
+
   auth: AngularFireAuth;
+
+  playedSong: FirebaseObjectObservable<any[]>;
 
   email: string;
 
   password: string;
 
   constructor(public af: AngularFire, _auth: AngularFireAuth) {
-    this.teams = af.database.list('/items');
+    this.teams = af.database.list('/teams');
+
+    this.songs = af.database.list('/songs');
+
+    this.playedSong = af.database.object('/playedSong');
+
+    console.log('playedSong', this.playedSong );
+
     console.log('teams', this.teams);
 
     this.auth = _auth;
@@ -65,6 +80,18 @@ export class AppComponent {
 
   logout() {
     this.af.auth.logout();
+  }
+
+  addSong() {
+    this.songs.push({artist: this.newSongArtist, title: this.newSongTitle});
+  }
+
+  removeSong(key: string) {
+    this.teams.remove(key);
+  }
+
+  showPlayedSong(songTitle: string) {
+    this.playedSong.set({ title: songTitle});
   }
 
 

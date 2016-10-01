@@ -2,6 +2,7 @@
         class="btn btn-info"
         data-toggle="collapse"
         data-target="#demo">Simple collapsible</button>
+
 <div id="demo" class="collapse">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit,
   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -20,6 +21,15 @@
   <h1>Helping Hands <img src="../assets/logo.gif"
                          height="80"
                          width="80"> Musical Quizz</h1>
+
+song played: {{(playedSong | async)?.title}}
+  <ul>
+    <li *ngFor="let song of songs | async">
+      {{song.title}}
+      <button (click)="showPlayedSong(song.title)">Show as played</button>
+    </li>
+  </ul>
+
 <ul class="team-list">
   <li class="team-item" *ngFor="let team of teams | async">
     <i (click)="removeTeam(team.$key, team.name)"
@@ -44,6 +54,15 @@
 
 
 <div class="sticky-footer">
+  <label for="add-song-artist">Song artist:</label>
+  <input id="add-song-artist" type="text" [(ngModel)]="newSongArtist">
+
+  <label for="add-song-title">Song title:</label>
+  <input id="add-song-title" type="text" [(ngModel)]="newSongTitle">
+
+  <button (click)="addSong(newSongArtist, newSongTitle)">Add song</button>
+
+
   <label for="add-team">Team name:</label>
   <input id="add-team" type="text" [(ngModel)]="newTeamName">
   <button (click)="addTeam(newTeamName)">Add Team</button>
