@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, AngularFireAuth} from 'angularfire2';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +11,22 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 export class AppComponent {
   teams: FirebaseListObservable<any[]>;
 
-  maximumPoints: number = 200;
+  maximumPoints: number = 50;
 
-  scoreHeight: number = 40;
+  scoreHeight: number = 20;
 
   newTeamName: string;
 
-  constructor(af: AngularFire) {
+  auth: AngularFireAuth;
+
+  email: string;
+
+  password: string;
+
+  constructor(public af: AngularFire, _auth: AngularFireAuth) {
     this.teams = af.database.list('/items');
     console.log('teams', this.teams);
+    this.auth = _auth;
   }
 
   ngOnInit() {
@@ -41,7 +48,17 @@ export class AppComponent {
     this.teams.push({name: this.newTeamName, score: 0});
   }
 
-  removeTeam(key: string) {
-    this.teams.remove(key);
+  removeTeam(key: string, teamName: string) {
+    let answer = confirm("Remove team: " + teamName + "?");
+    if (answer == true) {
+      this.teams.remove(key);
+    }
   }
+
+  login(){
+    this.af.auth.login({ email: this.email, password: this.password });
+    this.af.auth.login();
+  }
+
+
 }
