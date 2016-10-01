@@ -31,6 +31,8 @@ export class AppComponent {
 
   password: string;
 
+  songList: string;
+
   constructor(public af: AngularFire, _auth: AngularFireAuth) {
     this.teams = af.database.list('/teams');
 
@@ -92,6 +94,22 @@ export class AppComponent {
 
   showPlayedSong(songTitle: string) {
     this.playedSong.set({ title: songTitle});
+  }
+
+  populateSongs(songsList: string): void {
+    console.log('song list',JSON.parse(songsList));
+    let songsListArray: Array<any> = JSON.parse(songsList);
+    for (let song of songsListArray) {
+      let titleWithoutMP3: string = song.title.replace('.mp3', '');
+      this.songs.push({title: titleWithoutMP3});
+    }
+  }
+
+  clearSongs() {
+    let answer = confirm("Clear all songs?");
+    if (answer == true) {
+      this.songs.remove();
+    }
   }
 
 

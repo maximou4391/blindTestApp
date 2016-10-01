@@ -15,6 +15,13 @@
 <input id="password" type="password" [(ngModel)]="password">
 <button (click)="login()">Login</button>
 <button (click)="logout()">Logout</button>
+
+
+<input type="text" [(ngModel)]="songList">
+<button (click)="populateSongs(songList)">Populate song list</button>
+
+<button (click)="clearSongs()">Clear Songs</button>
+
 <div class="container">
 
 
@@ -22,7 +29,7 @@
                          height="80"
                          width="80"> Musical Quizz</h1>
 
-song played: {{(playedSong | async)?.title}}
+song played: {{(playedSong | async )?.title}}
   <ul>
     <li *ngFor="let song of songs | async">
       {{song.title}}
