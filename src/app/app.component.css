@@ -79,3 +79,29 @@ h1 {
   background-color: #f5f5f5;
   display: block;
 }
+
+.songs-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.songs-list li {
+  padding-left: 30px;
+  font-weight: bold;
+  position: relative;
+}
+
+.songs-list i {
+  position: absolute;
+  left: -2px;
+  top: -5px;
+}
+
+.fa {
+  cursor: pointer;
+}
+
+.selected-song {
+  color: red;
+}
+

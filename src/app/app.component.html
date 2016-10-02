@@ -1,7 +1,8 @@
 <button type="button"
         class="btn btn-info"
         data-toggle="collapse"
-        data-target="#demo">Simple collapsible</button>
+        data-target="#demo">Simple collapsible
+</button>
 
 <div id="demo" class="collapse">
   Lorem ipsum dolor sit amet, consectetur adipisicing elit,
@@ -29,34 +30,48 @@
                          height="80"
                          width="80"> Musical Quizz</h1>
 
-song played: {{(playedSong | async )?.title}}
-  <ul>
-    <li *ngFor="let song of songs | async">
-      {{song.title}}
-      <button (click)="showPlayedSong(song.title)">Show as played</button>
-    </li>
-  </ul>
 
-<ul class="team-list">
-  <li class="team-item" *ngFor="let team of teams | async">
-    <i (click)="removeTeam(team.$key, team.name)"
-       class="fa fa-trash fa-2x"
-       aria-hidden="true"></i>
-    <span class="team-name">{{team.name}}</span>
+  song played: {{(playedSong | async )?.title}}
+  <div class="row">
+    <div *ngIf="(songs | async)?.length > 0"
+         [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
+      <h2>Songs list</h2>
+      <ul class="songs-list">
+        <li *ngFor="let song of songs | async" [ngClass]="{'selected-song': (playedSong | async )?.title == song.title}">
+          <i (click)="showPlayedSong(song.title)"
+             class="fa fa-eye fa-2x"
+             aria-hidden="true"></i>
+          <span>{{song.title}}</span>
+        </li>
+      </ul>
+    </div>
 
-    <button class="minus" (click)="removePoint(team.$key, team.score)">-</button>
-    <button class="plus" (click)="addPoint(team.$key, team.score)">+</button>
+    <div [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
+      <h2>Teams list</h2>
+      <ul class="team-list">
+        <li class="team-item" *ngFor="let team of teams | async">
+          <i (click)="removeTeam(team.$key, team.name)"
+             class="fa fa-trash fa-2x"
+             aria-hidden="true"></i>
+          <span class="team-name">{{team.name}}</span>
 
-    <div class="score-outer" [style.height]="scoreHeight + 'px'">
-      <div class="score-inner" [style.width]="(team.score/maximumPoints)*100+'%'">
-      </div>
-      <span class="score-number"
-            [style.font-size]="scoreHeight + 'px'">{{team.score}}</span>
+          <button class="minus" (click)="removePoint(team.$key, team.score)">-</button>
+          <button class="plus" (click)="addPoint(team.$key, team.score)">+</button>
+
+          <div class="score-outer" [style.height]="scoreHeight + 'px'">
+            <div class="score-inner" [style.width]="(team.score/maximumPoints)*100+'%'">
+            </div>
+            <span class="score-number"
+                  [style.font-size]="scoreHeight + 'px'">{{team.score}}</span>
+
+          </div>
+
+        </li>
+      </ul>
 
     </div>
 
-  </li>
-</ul>
+  </div>
 </div>
 
 

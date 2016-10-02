@@ -13,9 +13,9 @@ export class AppComponent {
 
   songs: FirebaseListObservable<any[]>;
 
-  maximumPoints: number = 50;
+  maximumPoints: number = 20;
 
-  scoreHeight: number = 20;
+  scoreHeight: number = 30;
 
   newTeamName: string;
 
@@ -33,7 +33,7 @@ export class AppComponent {
 
   songList: string;
 
-  constructor(public af: AngularFire, _auth: AngularFireAuth) {
+  constructor(public af: AngularFire) {
     this.teams = af.database.list('/teams');
 
     this.songs = af.database.list('/songs');
@@ -42,13 +42,12 @@ export class AppComponent {
 
     console.log('playedSong', this.playedSong );
 
-    console.log('teams', this.teams);
-
-    this.auth = _auth;
   }
 
   ngOnInit() {
-    console.log(this.af.auth);
+
+    // Initialize played song
+    this.playedSong.set({ title: "Let's start!"});
   }
 
   addPoint(key: string, score: number) {
@@ -96,12 +95,26 @@ export class AppComponent {
     this.playedSong.set({ title: songTitle});
   }
 
+
+  // take path in folder
+  // open browser access path
+  // ctrl A
+  // copy into excel
+  // remove everything except the title and add column name "title"
+  // copy to http://shancarter.github.io/mr-data-converter/
+  // paste
   populateSongs(songsList: string): void {
     console.log('song list',JSON.parse(songsList));
     let songsListArray: Array<any> = JSON.parse(songsList);
+
+
     for (let song of songsListArray) {
-      let titleWithoutMP3: string = song.title.replace('.mp3', '');
-      this.songs.push({title: titleWithoutMP3});
+
+      let titleCleanedUp: string = song.title;
+      titleCleanedUp = titleCleanedUp.replace('.mp3', '');
+      titleCleanedUp = titleCleanedUp.replace('[pleer.net]', '');
+
+      this.songs.push({title: titleCleanedUp});
     }
   }
 
