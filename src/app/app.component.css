@@ -89,16 +89,13 @@ h1 {
   padding-left: 30px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
 }
 
 .songs-list i {
   position: absolute;
   left: -2px;
   top: -5px;
-}
-
-.fa {
-  cursor: pointer;
 }
 
 .selected-song {

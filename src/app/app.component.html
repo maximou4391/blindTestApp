@@ -37,9 +37,10 @@
          [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
       <h2>Songs list</h2>
       <ul class="songs-list">
-        <li *ngFor="let song of songs | async" [ngClass]="{'selected-song': (playedSong | async )?.title == song.title}">
-          <i (click)="showPlayedSong(song.title)"
-             class="fa fa-eye fa-2x"
+        <li *ngFor="let song of songs | async | orderByTitle"
+            [ngClass]="{'selected-song': (playedSong | async )?.title == song.title}"
+            (click)="showPlayedSong(song.title)">
+          <i class="fa fa-eye fa-2x"
              aria-hidden="true"></i>
           <span>{{song.title}}</span>
         </li>
@@ -76,13 +77,10 @@
 
 
 <div class="sticky-footer">
-  <label for="add-song-artist">Song artist:</label>
-  <input id="add-song-artist" type="text" [(ngModel)]="newSongArtist">
-
   <label for="add-song-title">Song title:</label>
   <input id="add-song-title" type="text" [(ngModel)]="newSongTitle">
 
-  <button (click)="addSong(newSongArtist, newSongTitle)">Add song</button>
+  <button (click)="addSong(newSongTitle)">Add song</button>
 
 
   <label for="add-team">Team name:</label>

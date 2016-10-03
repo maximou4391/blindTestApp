@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import * as _ from "lodash";
 
 import {AngularFire, FirebaseListObservable, FirebaseObjectObservable, AngularFireAuth} from 'angularfire2';
 
@@ -19,11 +20,7 @@ export class AppComponent {
 
   newTeamName: string;
 
-  newSongArtist: string;
-
   newSongTitle: string;
-
-  auth: AngularFireAuth;
 
   playedSong: FirebaseObjectObservable<any[]>;
 
@@ -39,9 +36,6 @@ export class AppComponent {
     this.songs = af.database.list('/songs');
 
     this.playedSong = af.database.object('/playedSong');
-
-    console.log('playedSong', this.playedSong );
-
   }
 
   ngOnInit() {
@@ -84,7 +78,7 @@ export class AppComponent {
   }
 
   addSong() {
-    this.songs.push({artist: this.newSongArtist, title: this.newSongTitle});
+    this.songs.push({title: this.newSongTitle});
   }
 
   removeSong(key: string) {
