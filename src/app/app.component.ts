@@ -74,12 +74,10 @@ export class AppComponent {
     this.af.auth.login({ email: this.email,
       password: this.password });
     this.af.auth.login();
-    location.reload();
   }
 
   logout() {
     this.af.auth.logout();
-    location.reload();
   }
 
   addSong() {
