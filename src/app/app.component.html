@@ -61,6 +61,7 @@
     <div *ngIf="(songs | async)?.length > 0"
          [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
       <h2>Songs list</h2>
+      <button class="btn btn-default reset-played-song" (click)="resetPlayedSong()">Reset played song (to show another song again)</button>
       <ul class="songs-list">
         <li *ngFor="let song of songs | async | orderByTitle"
             class="songs-list-item"

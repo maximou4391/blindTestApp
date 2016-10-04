@@ -114,3 +114,7 @@ h1 {
 .modal-dialog {
   margin-top: 10%;
 }
+
+.reset-played-song {
+  margin-bottom: 10px;
+}

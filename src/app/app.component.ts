@@ -24,6 +24,8 @@ export class AppComponent {
 
   playedSong: FirebaseObjectObservable<any[]>;
 
+  modalOpen: FirebaseObjectObservable<any[]>;
+
   email: string;
 
   password: string;
@@ -44,7 +46,11 @@ export class AppComponent {
 
     this.playedSong.subscribe(()=> {
       $('#played-song-modal').modal('show');
+      setTimeout(()=>{
+        $('#played-song-modal').modal('hide');
+      },5000);
     });
+
   }
 
   addPoint(key: string, score: number) {
@@ -122,5 +128,8 @@ export class AppComponent {
     }
   }
 
+  resetPlayedSong() {
+    this.playedSong.set({ title: "Let's start!"});
+  }
 
 }
