@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import * as _ from "lodash";
+declare var $: any;
 
 import {AngularFire, FirebaseListObservable, FirebaseObjectObservable, AngularFireAuth} from 'angularfire2';
 
@@ -39,7 +39,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-
     // Initialize played song
     this.playedSong.set({ title: "Let's start!"});
   }
@@ -71,10 +70,12 @@ export class AppComponent {
     this.af.auth.login({ email: this.email,
       password: this.password });
     this.af.auth.login();
+    location.reload();
   }
 
   logout() {
     this.af.auth.logout();
+    location.reload();
   }
 
   addSong() {
@@ -87,6 +88,7 @@ export class AppComponent {
 
   showPlayedSong(songTitle: string) {
     this.playedSong.set({ title: songTitle});
+    $('#played-song-modal').modal('show');
   }
 
 

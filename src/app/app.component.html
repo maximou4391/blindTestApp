@@ -1,27 +1,53 @@
-<button type="button"
-        class="btn btn-info"
-        data-toggle="collapse"
-        data-target="#demo">Simple collapsible
-</button>
+<i data-toggle="collapse"
+   data-target="#settings"
+   class="fa fa-cogs fa-2x"
+   aria-hidden="true"></i>
 
-<div id="demo" class="collapse">
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+<div id="settings"  class="panel panel-default collapse">
+  <div class="panel-body">
+    <div>
+      <label for="add-team">Team name:</label>
+      <input id="add-team" type="text" [(ngModel)]="newTeamName">
+      <button (click)="addTeam(newTeamName)">Add Team</button>
+    </div>
+
+    <div>
+      <label for="max-points">Max Points:</label>
+      <input id="max-points" type="number" [(ngModel)]="maximumPoints">
+    </div>
+
+    <div>
+      <label for="score-height">Score height:</label>
+      <input id="score-height" type="number" [(ngModel)]="scoreHeight">
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="text" [(ngModel)]="email">
+      <label for="password">Password</label>
+      <input id="password" type="password" [(ngModel)]="password">
+      <button (click)="login()">Login</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+
+
+    <div>
+      <label for="json-songs-list">Songs list as JSON:</label>
+      <input id="json-songs-list" type="text" [(ngModel)]="songList">
+      <button (click)="populateSongs(songList)">Populate song list</button>
+
+      <button (click)="clearSongs()">Clear Songs</button>
+    </div>
+
+    <div>
+      <label for="add-song-title">Song title:</label>
+      <input id="add-song-title" type="text" [(ngModel)]="newSongTitle">
+      <button (click)="addSong(newSongTitle)">Add one song</button>
+    </div>
+
+  </div>
 </div>
 
-<label for="email">Email</label>
-<input id="email" type="text" [(ngModel)]="email">
-<label for="password">Password</label>
-<input id="password" type="password" [(ngModel)]="password">
-<button (click)="login()">Login</button>
-<button (click)="logout()">Logout</button>
-
-
-<input type="text" [(ngModel)]="songList">
-<button (click)="populateSongs(songList)">Populate song list</button>
-
-<button (click)="clearSongs()">Clear Songs</button>
 
 <div class="container">
 
@@ -30,14 +56,14 @@
                          height="80"
                          width="80"> Musical Quizz</h1>
 
-
-  song played: {{(playedSong | async )?.title}}
+  <!--<div class="song-played">Song played: {{(playedSong | async )?.title}}</div>-->
   <div class="row">
     <div *ngIf="(songs | async)?.length > 0"
          [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
       <h2>Songs list</h2>
       <ul class="songs-list">
         <li *ngFor="let song of songs | async | orderByTitle"
+            class="songs-list-item"
             [ngClass]="{'selected-song': (playedSong | async )?.title == song.title}"
             (click)="showPlayedSong(song.title)">
           <i class="fa fa-eye fa-2x"
@@ -76,20 +102,14 @@
 </div>
 
 
-<div class="sticky-footer">
-  <label for="add-song-title">Song title:</label>
-  <input id="add-song-title" type="text" [(ngModel)]="newSongTitle">
-
-  <button (click)="addSong(newSongTitle)">Add song</button>
-
-
-  <label for="add-team">Team name:</label>
-  <input id="add-team" type="text" [(ngModel)]="newTeamName">
-  <button (click)="addTeam(newTeamName)">Add Team</button>
-
-  <label for="max-points">Max Points:</label>
-  <input id="max-points" type="number" [(ngModel)]="maximumPoints">
-
-  <label for="score-height">Score height:</label>
-  <input id="score-height" type="number" [(ngModel)]="scoreHeight">
+<!-- Modal -->
+<div class="modal fade" id="played-song-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2>Answer</h2>
+       <h3>{{(playedSong | async )?.title}}</h3>
+      </div>
+    </div>
+  </div>
 </div>
