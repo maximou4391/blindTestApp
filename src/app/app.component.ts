@@ -41,6 +41,10 @@ export class AppComponent {
   ngOnInit() {
     // Initialize played song
     this.playedSong.set({ title: "Let's start!"});
+
+    this.playedSong.subscribe(()=> {
+      $('#played-song-modal').modal('show');
+    });
   }
 
   addPoint(key: string, score: number) {
@@ -88,7 +92,6 @@ export class AppComponent {
 
   showPlayedSong(songTitle: string) {
     this.playedSong.set({ title: songTitle});
-    $('#played-song-modal').modal('show');
   }
 
 

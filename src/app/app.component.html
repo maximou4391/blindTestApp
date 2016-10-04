@@ -52,9 +52,9 @@
 <div class="container">
 
 
-  <h1>Helping Hands <img src="../assets/logo.gif"
-                         height="80"
-                         width="80"> Musical Quizz</h1>
+  <h1>Helping Hands <img src="../assets/logo.png"
+                         height="110"
+                         width="110"> Musical Quizz</h1>
 
   <!--<div class="song-played">Song played: {{(playedSong | async )?.title}}</div>-->
   <div class="row">
@@ -74,7 +74,7 @@
     </div>
 
     <div [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
-      <h2>Teams list</h2>
+      <h2 *ngIf="(songs | async)?.length > 0">Teams list</h2>
       <ul class="team-list">
         <li class="team-item" *ngFor="let team of teams | async">
           <i (click)="removeTeam(team.$key, team.name)"
@@ -107,7 +107,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <h2>Answer</h2>
+        <h2 *ngIf="((playedSong | async )?.title) != 'Let\'s start!'" class="answer">Answer</h2>
        <h3>{{(playedSong | async )?.title}}</h3>
       </div>
     </div>
