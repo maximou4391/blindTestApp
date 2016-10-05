@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import {AngularFireModule, AuthProviders, AuthMethods} from 'angularfire2';
 import {TeamScoreComponent} from "./teamScore/teamScore.component";
 import { OrderByTitlePipe } from './order-by-title.pipe';
+import { OrderByScorePipe } from './order-by-score.pipe';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBywWbN07uMZmntKrQwvtKFEpMMmdr6jqg",
@@ -26,7 +27,8 @@ const myFirebaseAuthConfig = {
   declarations: [
     AppComponent,
     TeamScoreComponent,
-    OrderByTitlePipe
+    OrderByTitlePipe,
+    OrderByScorePipe
   ],
   imports: [
     BrowserModule,

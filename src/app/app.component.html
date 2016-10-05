@@ -56,7 +56,6 @@
                          height="110"
                          width="110"> Musical Quizz</h1>
 
-  <!--<div class="song-played">Song played: {{(playedSong | async )?.title}}</div>-->
   <div class="row">
     <div *ngIf="(songs | async)?.length > 0"
          [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
@@ -77,7 +76,7 @@
     <div [ngClass]="{'col-xs-6': (songs | async)?.length > 0}">
       <h2 *ngIf="(songs | async)?.length > 0">Teams list</h2>
       <ul class="team-list">
-        <li class="team-item" *ngFor="let team of teams | async">
+        <li class="team-item" *ngFor="let team of teams | async | orderByScore">
           <i *ngIf="(songs | async)?.length > 0"
              (click)="removeTeam(team.$key, team.name)"
              class="fa fa-trash fa-2x"
