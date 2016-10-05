@@ -52,7 +52,7 @@
 <div class="container">
 
 
-  <h1>Helping Hands <img src="../assets/logo.png"
+  <h1 *ngIf="!((songs | async)?.length > 0)">Helping Hands <img src="../assets/logo.png"
                          height="110"
                          width="110"> Musical Quizz</h1>
 
@@ -78,20 +78,26 @@
       <h2 *ngIf="(songs | async)?.length > 0">Teams list</h2>
       <ul class="team-list">
         <li class="team-item" *ngFor="let team of teams | async">
-          <i (click)="removeTeam(team.$key, team.name)"
+          <i *ngIf="(songs | async)?.length > 0"
+             (click)="removeTeam(team.$key, team.name)"
              class="fa fa-trash fa-2x"
              aria-hidden="true"></i>
           <span class="team-name">{{team.name}}</span>
 
-          <button class="minus" (click)="removePoint(team.$key, team.score)">-</button>
-          <button class="plus" (click)="addPoint(team.$key, team.score)">+</button>
+          <template [ngIf]="(songs | async)?.length > 0">
+            <button class="minus" (click)="removePoint(team.$key, team.score)">-</button>
+            <button class="plus" (click)="addPoint(team.$key, team.score)">+</button>
+          </template>
 
           <div class="score-outer" [style.height]="scoreHeight + 'px'">
-            <div class="score-inner" [style.width]="(team.score/maximumPoints)*100+'%'">
+           <!-- <div class="score-inner" >
+            </div>-->
+
+            <div class="rainbow" [style.width]="(team.score/maximumPoints)*100+'%'">
             </div>
+
             <span class="score-number"
                   [style.font-size]="scoreHeight + 'px'">{{team.score}}</span>
-
           </div>
 
         </li>

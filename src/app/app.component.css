@@ -13,7 +13,7 @@
   height: 100%;
   display: inline-block;
   background-color: black;
-  box-shadow: 0px 0px 15px #3e7bbc;
+  box-shadow: 0px 0px 15px white;
   border-radius: 3px;
 }
 
@@ -52,6 +52,7 @@ h1 {
   margin-left: 10px;
   vertical-align: super;
   position: relative;
+  text-shadow: 0px 0px 15px white;
 }
 
 .minus,
@@ -117,4 +118,15 @@ h1 {
 
 .reset-played-song {
   margin-bottom: 10px;
+}
+
+.rainbow {
+  box-shadow: 0px 0px 15px white;
+  height: 100%;
+  display: inline-block;
+  border-radius: 50px;
+  background: -webkit-linear-gradient(right, #e468a7, #ec403e, #eb9b44, #ffea51, #549f4d, #4b97c8, #4376e1, #44488f); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(left,  #e468a7, #ec403e, #eb9b44, #ffea51, #549f4d, #4b97c8, #4376e1, #44488f); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(left,  #e468a7, #ec403e, #eb9b44, #ffea51, #549f4d, #4b97c8, #4376e1, #44488f); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to left,  #e468a7, #ec403e, #eb9b44, #ffea51, #549f4d, #4b97c8, #4376e1, #44488f); /* Standard syntax */
 }
